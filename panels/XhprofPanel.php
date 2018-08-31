@@ -44,11 +44,15 @@ class XhprofPanel extends Panel implements BootstrapInterface
 
     public function getSummary()
     {
-        return Yii::$app->view->renderFile(__DIR__ . '/../views/summary.php', [
-            'panel' => $this,
-            'active' => $this->xhprofEnabled(),
-            'callCount' => count($this->data)
-        ]);
+        if (function_exists('xhprof_enable')) {
+            return Yii::$app->view->renderFile(__DIR__ . '/../views/summary.php', [
+                'panel' => $this,
+                'active' => $this->xhprofEnabled(),
+                'callCount' => count($this->data)
+            ]);
+        }
+
+        return null;
     }
 
     /**
@@ -144,5 +148,3 @@ class XhprofPanel extends Panel implements BootstrapInterface
         return isset($_GET['_xhprof']) || isset($_COOKIE['_xhprof']);
     }
 }
-
-
