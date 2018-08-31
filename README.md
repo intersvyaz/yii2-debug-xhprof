@@ -14,32 +14,19 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist trntv/yii2-debug-xhprof "*"
+php composer.phar require --prefer-dist intersvyaz/yii2-xhprof
 ```
 
-or add
-
-```
-"trntv/yii2-debug-xhprof": "*"
-```
-
-to the require section of your `composer.json` file.
 
 add panel to your debug module configuration
 ```
-'modules'=>[
-    ...
-    'debug'=>[
-        ...
-        'panels'=>[
-            ...
-            'xhprof'=>[
-                'class'=>'\trntv\debug\xhprof\panels\XhprofPanel'
-            ]
-        ]
-    ]
-    ...
-]
+'modules' => [
+    'debug' => [
+        'panels' => [
+            'xhprof' => ['class' => \intersvyaz\xhprof\panels\XhprofPanel::class],
+        ],
+    ],
+],
 ```
 
 Usage

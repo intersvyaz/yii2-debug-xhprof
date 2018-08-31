@@ -1,17 +1,21 @@
 <?php
-/* @var $panel yii\debug\panels\DbPanel */
+/**
+ * @var intersvyaz\xhprof\panels\XhprofPanel $panel
+ * @var boolean $active
+ * @var integer $callCount
+ */
 ?>
-<div class="yii-debug-toolbar-block">
+<div class="yii-debug-toolbar__block">
     <a href="<?= $panel->getUrl() ?>" title="<?= $active ? "$callCount function calls." : "xhprof wasn't active for this request" ?>.">
-        Xhprof <span class="label <?php echo $active ? 'label-success' : '' ?>"><?= $callCount ?></span>
+        Xhprof
+        <?php if ($active): ?>
+            <span class="yii-debug-toolbar__label yii-debug-toolbar__label_info"><?= $callCount ?></span>
+        <?php endif; ?>
     </a>
-    <?php if($active): ?>
-        <a href="#" title="Disable xhprof" onclick="document.cookie='_xhprof=1; expires=Thu, 01 Jan 1970 00:00:00 UTC'; return false"">
-            <span class="label label-warning">Disable</span>
-        </a>
-    <?php else: ?>
-        <a href="#" title="Enable xhprof" onclick="document.cookie='_xhprof=1'; return false"">
-            <span class="label label-success">Enable</span>
-        </a>
-    <?php endif; ?>
+    <a href="#" title="Disable xhprof" onclick="enableXhprof(event, false)" class="<?= $active ? '' : 'hide'; ?>">
+        <span class="yii-debug-toolbar__label yii-debug-toolbar__label_warning">Disable</span>
+    </a>
+    <a href="#" title="Enable xhprof" onclick="enableXhprof(event, true)" class="<?= $active ? 'hide' : ''; ?>">
+        <span class="yii-debug-toolbar__label yii-debug-toolbar__label_success">Enable</span>
+    </a>
 </div>
